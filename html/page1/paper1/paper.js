@@ -12,6 +12,9 @@ let numbers = "6417390258"
 function inlock() {
     let doc = ""
     let data = nolock.value
+    if (check.checked) {
+        data = encodeURI(encodeURIComponent(data))
+    }
     for (let i=0; i < data.length; i++) {
         let word = data[i]
         let ascii = word.charCodeAt()
@@ -32,18 +35,12 @@ function inlock() {
         }
     }
 
-    if (check.checked) {
-        doc = encodeURI(encodeURIComponent(doc))
-    }
     lock.value = doc
 }
 
 function unlock() {
     let doc = ""
     let data = lock.value
-    if (check.checked) {
-        data = decodeURIComponent(decodeURI(data))
-    }
     for (let i in data) {
         let word = data[i]
         let ascii = word.charCodeAt()
@@ -59,6 +56,10 @@ function unlock() {
         } else {
             doc +=word
         }
+    }
+
+    if (check.checked) {
+        doc = decodeURIComponent(decodeURI(doc))
     }
     nolock.value = doc
 }
