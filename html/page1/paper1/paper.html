@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zctor的个人小站</title>
+    <link rel="stylesheet" href="./paper.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+</head>
+<body>
+    <div class="header">
+        <div class="center">
+            <h1>Zctor的个人博客</h1>
+            <a href="../../../index.html">
+                <span>
+                    <i class="fa fa-home"></i>
+                    首页
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <div class="center inlock">
+        <textarea id="no-lock" rows="10" placeholder="待加密文本"></textarea>
+    </div>
+
+    <div class="buttons center">
+        <button id="in">
+            加密
+            <i class="fa fa-arrow-down"></i>
+        </button>
+        <button id="un">
+            解密
+            <i class="fa fa-arrow-up"></i>
+        </button>
+
+        <label for="cho">
+            <input type="checkbox" id="cho" name="x">
+            <span class="unicode">Unicode</span>
+        </label>
+
+        <button class="clear-info" id="clear-info">
+            清理
+            <i class="fa fa-remove"></i>
+        </button>
+    </div>
+
+    <div class="center unlock">
+        <textarea id="lock" rows="10" placeholder="待解密文本"></textarea>
+    </div>
+
+    
+
+    <script src="paper.js"></script>
+    
+</body>
+</html>

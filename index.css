@@ -1,11 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-}
-
-.k {
-    clear: both;
-    margin-bottom: 1000px;
+    box-sizing: border-box;
 }
 
 a {
@@ -19,8 +15,9 @@ ul {
 
 body {
     min-width: 1200px;
-    /* background-image: url(./img/bg1.png); */
-    background-image: linear-gradient(32deg, rgba(163, 234, 217, 0.8), rgba(145, 154, 249, 0.8));
+    background-image:
+    linear-gradient(66deg, rgba(46, 113, 249, 0.3), rgba(0,255,0,0) 70.71%),
+    linear-gradient(-66deg, rgba(90, 242, 244, 0.3), rgba(57, 77, 255, 0) 70.71%);  
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
@@ -39,14 +36,22 @@ body {
     opacity: 0.8;
 }
 
+.header h1 {
+    float: left;
+}
+
+.header span {
+    color: #fff;
+    float: right;
+}
+
 .content .all-article {
     float: left;
     width: 72%;
-    /* background-color: #fff; */
 }
 
 .content .all-article li {
-    height: 210px;
+    height: 200px;
     margin-bottom: 20px;
     border-radius: 11px;
     background-color: #fff;
@@ -58,13 +63,13 @@ body {
 .content .all-article li img {
     float: left;
     width: 34%;
+    height: 100%;
 }
 
 .content .all-article li .info {
     float: right;
     width: 66%;
     padding: 24px 40px;
-    box-sizing: border-box;
 }
 
 .content .all-article li .info p {
@@ -86,10 +91,38 @@ body {
     border-radius: 11px;
     background-color: #fff;
     box-shadow: 0px 3px 7px -3px rgba(0,0,0,0.3);
-    box-sizing: border-box;
 }
 
 .content .info-panel .box h2 {
     padding-bottom: 5px;
     border-bottom: 3px solid #000;
+}
+
+.content .info-panel .new-article li {
+    display: block;
+    height: 52px;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+
+.content .info-panel .new-article li div {
+    float: right;
+    display: block;
+    width: 75%;
+    height: 59px;
+    padding: 1px 11px;
+    font-size: 12px;
+}
+
+.content .info-panel .new-article li img{
+    float: left;
+    width: 25%;
+    height: 100%;
+}
+
+.content .info-panel .new-article li h3 {
+    font-size: 14px;
 }
