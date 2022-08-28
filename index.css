@@ -27,6 +27,7 @@ body {
     margin: 0 auto;
 }
 
+/* 头部· */
 .header {
     height: 60px;
     margin-bottom: 20px;
@@ -45,6 +46,7 @@ body {
     float: right;
 }
 
+/* 所有文章 */
 .content .all-article {
     float: left;
     width: 72%;
@@ -78,6 +80,7 @@ body {
     font-size: 15px;
 }
 
+/* 信息面板 */
 .content .info-panel {
     float: right;
     width: 26%;
@@ -98,31 +101,35 @@ body {
     border-bottom: 3px solid #000;
 }
 
+/* 最新文章 */
 .content .info-panel .new-article li {
     display: block;
-    height: 54px;
+    height: 60px;
     margin-top: 10px;
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
     overflow: hidden;
 }
 
+.content .info-panel .new-article li img{
+    float: left;
+    width: 30%;
+    height: 100%;
+}
 
 .content .info-panel .new-article li div {
     float: right;
     display: block;
-    width: 75%;
+    width: 70%;
     height: 59px;
     padding: 1px 11px;
     font-size: 12px;
 }
 
-.content .info-panel .new-article li img{
-    float: left;
-    width: 25%;
-    height: 100%;
+.content .info-panel .new-article li div h3 {
+    font-size: 14px;
 }
 
-.content .info-panel .new-article li h3 {
-    font-size: 14px;
+.content .info-panel .new-article li div span {
+    line-height: 25px;
 }
