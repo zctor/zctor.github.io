@@ -15,16 +15,6 @@ ul {
 
 body {
     min-width: 1200px;
-    background-image:
-    linear-gradient(66deg, rgba(46, 113, 249, 0.3), rgba(0,255,0,0) 70.71%),
-    linear-gradient(-66deg, rgba(90, 242, 244, 0.3), rgba(57, 77, 255, 0) 70.71%);  
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
-.center {
-    width: 1200px;
-    margin: 0 auto;
 }
 
 /* 头部· */
@@ -39,97 +29,59 @@ body {
 
 .header h1 {
     float: left;
+    margin-left: 5%;
 }
 
 .header span {
     color: #fff;
     float: right;
+    margin-right: 5%;
+}
+
+.center {
+    width: 1200px;
+    margin: 0 auto;
 }
 
 /* 所有文章 */
-.content .all-article {
-    float: left;
-    width: 72%;
+.content {
+    width: 80%;
 }
 
-.content .all-article li {
-    height: 200px;
-    margin-bottom: 20px;
-    border-radius: 11px;
-    background-color: #fff;
-    box-shadow: 0px 3px 7px -3px rgba(0,0,0,0.3);
+.content li {
+    width: 1200px;
+    height: 250px;
     overflow: hidden;
-    opacity: 0.9;
+    margin-bottom: 25px;
+    border-radius: 11px;
+    box-shadow: 0px 3px 7px -3px rgba(0,0,0,0.3);
 }
 
-.content .all-article li img {
+.content li img {
     float: left;
-    width: 34%;
+    width: 32%;
     height: 100%;
 }
 
-.content .all-article li .info {
-    float: right;
-    width: 66%;
+.content li .info {
+    position: relative;
+    float: left;
+    width: 65%;
+    height: 100%;
     padding: 24px 40px;
 }
 
-.content .all-article li .info p {
-    margin-top: 9px;
-    margin-bottom: 15px;
+.content .info h3 {
+    padding-left: 5px;
+    border-left: 8px solid rgba(0,0,0,0.85);
+}
+
+.content .info p {
+    margin-top: 15px;
     font-size: 15px;
 }
 
-/* 信息面板 */
-.content .info-panel {
-    float: right;
-    width: 26%;
-    opacity: 0.9;
-}
-
-.content .info-panel .box {
-    height: 400px;
-    margin-bottom: 20px;
-    padding: 11px 15px;
-    border-radius: 11px;
-    background-color: #fff;
-    box-shadow: 0px 3px 7px -3px rgba(0,0,0,0.3);
-}
-
-.content .info-panel .box h2 {
-    padding-bottom: 5px;
-    border-bottom: 3px solid #000;
-}
-
-/* 最新文章 */
-.content .info-panel .new-article li {
-    display: block;
-    height: 60px;
-    margin-top: 10px;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-}
-
-.content .info-panel .new-article li img{
-    float: left;
-    width: 30%;
-    height: 100%;
-}
-
-.content .info-panel .new-article li div {
-    float: right;
-    display: block;
-    width: 70%;
-    height: 59px;
-    padding: 1px 11px;
-    font-size: 12px;
-}
-
-.content .info-panel .new-article li div h3 {
-    font-size: 14px;
-}
-
-.content .info-panel .new-article li div span {
-    line-height: 25px;
+.content .info span {
+    position: absolute;
+    bottom: 15px;
 }
