@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zctor blog</title>
+    <link rel="stylesheet" href="../css/FontAwesome/css/all.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/planeWars.css">
+</head>
+
+<body>
+    <div class="header">
+        <a href="../index.html">
+            <h1>Zctor Blog</h1>
+            <span><i class="fa-solid fa-house"></i>&nbsp;首页</span>
+        </a>
+    </div>
+
+    <div class="center">
+        <div class="float-box">
+            <div class="menu" onmouseleave="setNotShow()">
+                <dl>
+                    <dt><a href="#createWindow">创建窗口</a></dt>
+                    <dt><a href="#createShip">创建飞船</a></dt>
+                    <dt><a href="#createBullet">创建子弹</a></dt>
+                    <dt><a href="#createEnemy">创建敌方</a></dt>
+
+                    <dt class="collide arrow"><a href="#collideCheck">碰撞检测</a></dt>
+                    <dd class="collide"><a href="#bulletCollideCheck">子弹碰撞检测</a></dd>
+                    <dd class="collide"><a href="#shipCollideCheck">玩家碰撞检测</a></dd>
+                
+                    <dt class="info arrow"><a href="#createInfo">创建信息</a></dt>
+                    <dd class="info"><a href="#recordScore">记录得分</a></dd>
+                    <dd class="info"><a href="#shipLife">飞船生命</a></dd>
+                    <dd class="info"><a href="#updateLife">更新生命</a></dd>
+
+                    <dt><a href="#reStart">重新开始</a></dt>
+
+                    <dt class="event arrow"><a href="#createEvent">创建事件</a></dt>
+                    <dd class="event"><a href="#shipInvincible">飞船无敌帧</a></dd>
+                    <dt class="event"><a href="#allExample">完整示例</a></dt>
+                </dl>
+            </div>
+
+            <div class="content">
+                <h1>Pygame 飞机大战</h1>
+                <p>正所谓万事开头难，对于第一次接触游戏制作的朋友来说，可能会有点难以理解，但是没关系，唯手熟尔，写的多了自然而然也就理解了，下面进入正题。本文内容需要对 python、pygame 有所了解并掌握基础内容。</p>
+                <p>首先需要准备工具有：</p>
+                <ul>
+                    <li>Vscode、PyCharm 等任一开发工具</li>
+                    <li>Python 解释器</li>
+                    <li>Pygame 第三方库</li>
+                </ul>
+                <p>开始创建游戏前先建立以下文件：</p>
+                <ul class="filelist">
+                    <li>main.py<span>程序在此文件运行</span></li>
+                    <li>ship.py<span>玩家的创建及行为</span></li>
+                    <li>bullet.py<span>子弹的创建及行为</span></li>
+                    <li>config.py<span>默认的可配置参数</span></li>
+                    <li>enemy.py<span>敌人的创建及行为</span></li>
+                </ul>
+
+                <h2 id="createWindow">创建窗口</h2>
+                <p>首先来编辑<code class="file">config.py</code>配置好基础数据。</p>
+                <pre><code class="config-1"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <p>SCREEN_SIZE 是窗口的大小，FPS 是游戏的画面帧率，WHITE 为白色。</p>
+                <p>再来编辑<code class="file">main.py</code>开始创建游戏。</p>
+                <pre><code class="main-1"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <div class="imglist">
+                    <img src="../img/planeWars/bg.png" alt="background">
+                    <img src="../img/planeWars/bg.png" alt="background">
+                    <img src="../img/planeWars/bg.png" alt="background">
+                </div>
+                <p>导入 sys、pygame、config 库，创建游戏类，此类负责处理所有数据内容，__init__() 方法将在类创建时自动运行，所以可以在其中写入初始化参数，第8行初始化 pygame 库，self.screen 保存创建后的窗口，创建的窗口大小是在 config.py 文件中编辑的 SCREEN_SIZE 大小，加载背景图片，self.bg_pos 的第一个参数为第一背景的 y 轴位置，第二个参数为第二背景的 y 轴位置，以此类推。self.delay 为延迟，后面将使用延迟来实现图片的更新。</p>
+                <p>event_check() 用于检测程序运行时发生的事件，pygame.QUIT 是点击退出窗口时发生的事件，这里做 sys.exit() pygame.quit() 以保证成功退出。</p>
+                <p>update() 计算所有游戏内容的数值，在我们玩游戏的时候，本质上都是对数据进行操作，通过不断改变数值来实现分丰富多彩的视觉效果，目前计算在每一次调用此方法时增加 self.delay，当数值达到 100 时赋值为 0。遍历背景图片位置，对每一个背景实现移动 bg_speed 像素，当背景 y 轴大于窗口大小时重置位置，后面的三元运算符用于判断当前是第几次循环，如果是第一次则加上 bg_speed 防止背景衔接问题，第二次则不加入偏移量。</p>
+                <p>pygame 的绘制与 PhotoShop 有点相似，先渲染图层，叠加在一起统一绘制到屏幕上，draw() 先对窗口进行填充白色，防止上一次绘制的内容透叠到本次绘画上，遍历每个背景位置并绘制，pygame.display.flip() 将所有图层提交到屏幕，最后设置帧率以保证在不同主机上运行效果一致。</p>
+                <p>游戏将在 run() 调用后运行，通过不断循环事件检测，数据更新，屏幕绘制来实现游戏动画效果。</p>
+
+                <h2 id="createShip">创建飞船</h2>
+                <p>现在开始创建我们的玩家飞船。</p>
+                <p>先对<code class="file">config.py</code>进行飞机基础参数设置。</p>
+                <pre><code class="config-2"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <p>设置飞船的生命和速度。</p>
+                <p>打开<code class="file">ship.py</code>编辑如下内容：</p>
+                <pre><code class="ship-1"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <p>导入 pygame、config 创建飞船类继承自 pygame.sprite.Sprite。在初始化处接收参数 screen 接收屏幕的相关数据，初始化父类，创建正常图片的列表以及销毁图片的列表，接收 screen 参数，设置飞船生命状态，飞船图片索引，初始化速度，获取图片矩形，获取 self.mask 以便后面进行碰撞检测，初始化飞船的位置于屏幕底部中心</p>
+                <p>move() 的 direction 用于判断移动方向，通过接收四中类型参数实现不同方向的移动，up 时向上移动，越界时设置位置为边界，其余同理。</p>
+                <p>update() 接收 delay 参数，通过此参数可以实现延迟切换图片实现动画效果，不至于在一瞬间所有图片迅速切换；每 5 次执行一次图片的递增 self.state 状态为 True 时 索引上限为正常图片列表长度，状态为 False 时，是销毁的图片索引，索引上限为销毁图片列表的长度。</p>
+                <p>draw() 绘制玩家，self.state 为 True 绘制正常图片，反之绘制销毁图片。</p>
+                <p>回到<code class="file">main.py</code>进行修改如下：</p>
+                <pre><code class="main-2"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <div class="imglist">
+                    <img src="../img/planeWars/ship.png" alt="ship">
+                    <img src="../img/planeWars/ship.png" alt="ship">
+                    <img src="../img/planeWars/ship.png" alt="ship">
+                </div>
+                <p>可以看到在 __init__(self) 处新增了飞船变量，并通过 init_sprite() 进行初始化。</p>
+                <p>往下 event_check() 新增键盘获取，通过判断方向键按下传入参数并调用 Ship 类 move() 方法。</p>
+                <p>在 update() 添加 Ship 类的更新方法，并传入延迟参数。</p>
+                <p>在 draw() 添加飞船的绘画方法。</p>
+
+                <h2 id="createBullet">创建子弹</h2>
+                <p>继续修改<code class="file">config.py</code>：</p>
+                <pre><code class="config-3"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <p>设置子弹的速度和数量。</p>
+                <p>编辑<code class="file">bullet.py</code>：</p>
+                <pre><code class="bullet-1"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <p>导入 pygame、config，创建 Bullet 类并继承自 pygame.sprite.Sprite，创建 __init__(self, screen) 初始化方法并接收参数 screen 获取屏幕窗口信息，加载子弹图片，获取图片矩形和 mask 以便碰撞检测，设置初始状态为 False，设置速度为 <code class="file">config.py</code>的 BULLET_SPEED。</p>
+                <p>update() 在 self.state 状态为 True 时执行下列代码，子弹的 y 轴坐标向屏幕上方以 self.speed 的速度移动，当子弹矩形的底部大于屏幕上边缘时，将 self.state 状态设为 False。</p>
+                <p>reset() 接收 pos 参数用于设置子弹初始位置，接下来把子弹状态设为 True，通过 update() 将子弹位置移动，实现子弹发射出去的效果。</p>
+                <p>draw() 在子弹状态为 True 时，将子弹绘制到窗口。</p>
+                <p>回到<code class="file">main.py</code>作如下修改：</p>
+                <pre><code class="main-3"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <div class="imglist">
+                    <img src="../img/planeWars/bullet.png" alt="bullet">
+                    <img src="../img/planeWars/bullet.png" alt="bullet">
+                    <img src="../img/planeWars/bullet.png" alt="bullet">
+                </div>
+                <p>加入 bullet 模块，修改 __init__() 方法在其中加入 self.bullet_list 变量，用于存储所有子弹的列表，以实现对子弹的集中统一管理。</p>
+                <p>在 init_sprite() 方法中通过 for 循环创建 BULLET_NUM 个子弹类并加入子弹列表。</p>
+                <p>update() 的 bullet_reset 变量用于辅助子弹的初始化，在每次执行时设其为 True，子弹列表循环体中判断当前是否延迟 15 次循环，并且当前循环的子弹状态是否为 False 且可以重置子弹状态时执行代码块内容，重置子弹位置及状态，在设置此次 for 循环不可在执行子弹重置以保证一次循环只重置一次子弹，防止子弹重叠，导致多个数量的子弹只显示一个，后面同步更新所有子弹即可。</p>
+                <p>draw() 加入子弹的绘制，在飞船前加入代码是为了先绘制子弹，后绘制飞船以实现在初始化时，子弹位于飞船顶部，遮盖子弹，从而在视觉效果上体现出子弹从飞船中发射出去。</p>
+
+                <h2 id="createEnemy">创建敌方</h2>
+                <p>编辑<code class="file">config.py</code>：</p>
+                <pre><code class="config-4"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <p>新增敌人速度和敌人数量。</p>
+                <p>编辑<code class="file">enemy.py</code>：</p>
+                <pre><code class="enemy-1"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <p>导入模块，randint 返回随机区间数，__init__() 初始化窗口信息，正常图片，销毁图片列表，图片矩形，mask 属性销毁图片索引，敌人状态，敌人初速，最后调用重置方法。</p>
+                <p>update() 接收延迟，判断状态为真时移动位置，图像矩形顶部大于等于窗口时状态为假，判断状态为假时根据延迟进如代码块，更新销毁图片索引，销毁图片索引走完一个循环时调用重置。</p>
+                <p>reset() 负责重置属性。图像矩形随机重置在不可见的窗口上部分区域，状态设为真。</p>
+                <p>编辑<code class="file">main.py</code>：</p>
+                <pre><code class="main-4"><button class="copy" onclick="coypText(this)">Copy</button></code></pre>
+                <div class="imglist">
+                    <img src="../img/planeWars/enemy.png" alt="enemy">
+                    <img src="../img/planeWars/enemy.png" alt="enemy">
+                    <img src="../img/planeWars/enemy.png" alt="enemy">
+                </div>
+                <p>导入 enemy 模块，__init__() 新增敌人列表。init_sprite() 初始化敌人列表，创建敌人对象并加入组中。update() 敌人列表成员调用自身数据更新。draw() 绘制敌人列表。</p>
+                <h2 id="collideCheck">碰撞检测</h2>
+                <p>可以看到该有的元素都差不多到齐了，但是不论是我方飞船还是子弹与敌机碰撞都没有任何事情发生，这就是接下来需要做的事了，需要给画面中的精灵加入碰撞检测，从而实现动画效果。</p>
+                <h3 id="bulletCollideCheck">子弹碰撞检测</h3>
+                <p>进入到<code class="file">main.py</code>的 update() 函数中，做如下修改：</p>
+                <pre><code class="main-5"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <div class="imglist">
+                    <img src="../img/planeWars/boom.png" alt="boom">
+                    <img src="../img/planeWars/boom.png" alt="boom">
+                    <img src="../img/planeWars/boom.png" alt="boom">
+                </div>
+                <p>通过简单的几行修改就让程序变得更加生动有趣，下面就来解读以下代码内容，当我们在更新每一个子弹数据的时候，都对其与敌人列表每一元素进行碰撞检测，当子弹与敌人碰撞其子弹状态与敌人状态都为真时进入代码块，将子弹状态与敌人状态都设为假，达到销毁的目的，这样在下一次循环时，每一个精灵对象更新自身时，都会进行状态检测，从而进入到自身的销毁工作，销毁结束后在重置回去，在视觉上形成销毁，但实际上只不过是对其进行销毁动画在重置所有数据，达到节省内存开销，提升效率。在之前判读碰撞之所以加上子弹和敌人的状态判断，是为了防止下一次循环时，敌人的状态已经为假了，但第二个子弹也对其发生了碰撞检测，从而导致同一敌人对象销毁了两次，现在内容不多，所有没有 BUG 产生，等到后面需要再次进行追加内容时会产生意向不到的结果。</p>
+                <h3 id="shipCollideCheck">玩家碰撞检测</h3>
+                <p>现在玩家可以随意摧毁敌人，但敌人却无法对我方造成任何伤害，未免有失公允，造成不平衡，所以接下来我们为玩家加入碰撞检测，让敌人也能随意摧毁我们让游戏更加公平也更有挑战。</p>
+                <p>编辑<code class="file">main.py</code>中的 update() 方法：</p>
+                <pre><code class="main-6"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <div class="imglist">
+                    <img src="../img/planeWars/ship_boom.png" alt="ship_boom">
+                    <img src="../img/planeWars/ship_boom.png" alt="ship_boom">
+                    <img src="../img/planeWars/ship_boom.png" alt="ship_boom">
+                </div>
+                <p>在遍历敌人列表时，对每一个敌人进行碰撞检测，如果发生碰撞并且当前玩家状态为真时，玩家与敌人状态为假。</p>
+                <p>这样就实现了玩家与敌人的双重毁灭。</p>
+                <h2 id="createInfo">创建信息</h2>
+                <p>现在程序的基础功能都齐全了，是时候给它加上其他点缀来丰富画面，比如说文本信息。虽然我们让两个阵营的对象有了处理，但并有什么东西来辅助我们了解到底发生了多少次处理记录，所以接下来我们为程序加入文本内容，来辅助玩家获取信息。</p>
+                <h3 id="recordScore">记录得分</h3>
+                <p>打开<code class="file">main.py</code>修改 __init__()：</p>
+                <pre><code class="main-7"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <p>添加得分变量，得分图片以及得分字体。</p>
+                <p>再转到 update() 和 draw() 处做如下修改：</p>
+                <pre><code class="main-8"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <div class="imglist">
+                    <img src="../img/planeWars/score.png" alt="score">
+                    <img src="../img/planeWars/score.png" alt="score">
+                    <img src="../img/planeWars/score.png" alt="score">
+                </div>
+                <p>我们在 update() 中的子弹碰撞检测那新增成功碰撞后的处理，击毁敌人得分增加 100，还在后面增加得分图像的更新处理，当得分变化时，可以根据得分数值变量来修改图片，在来到 draw()  将其绘制到屏幕上。</p>
+                <h3 id="shipLife">飞船生命</h3>
+                <p>现在双方阵营都有了相关的信息显示，但是目前来说，对敌方是不公平的，我方虽然会因为碰撞而销毁，但很快就会复活，将一直持续下去，所以后面将加入生命显示，来对游戏进程进行控制。</p>
+                <p>编辑<code class="file">main.py</code>的 __init__()、init_sprite()、draw()：</p>
+                <pre><code class="main-9"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <p>在 __init__() 中我们通过字典存储接下所有需要用到的 ui 数据。</p>
+                <p>init_sprite() 追加飞船图片生命的图片，获取图片矩形，存储到字典中。</p>
+                <p>draw() 遍历飞船生命个数，在窗口上绘制生命数量，位置通过计算窗口宽减去图片宽度在加入每个生命图片的偏移间隔，窗口高度减去图片高度求得位置。</p>
+                <h3 id="updateLife">更新生命</h3>
+                <p>生命信息显示有了，下面就是修改信息，继续编辑<code class="file">main.py</code>中的 __init__()、update()、draw()：</p>
+                <pre><code class="main-10"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <div class="imglist">
+                    <img src="../img/planeWars/life.png" alt="life">
+                    <img src="../img/planeWars/life.png" alt="life">
+                    <img src="../img/planeWars/life.png" alt="life">
+                </div>
+                <p>__init__() 加入游戏状态变量，用于判断游戏是否结束，初始化为 False。</p>
+                <p>update() 判断游戏状态为真时跳过除背景移动的所有数据更新并在飞船更新处加入条件判断飞船生命是否为空且飞船销毁动画播放完毕后重置状态为真时修改游戏状态为 False 结束所有数据更新。在敌方碰撞检测生效处加入递减玩家生命，实现生命消耗。</p>
+                <p>来到 draw() 把除背景更新画布提交时钟设置的所有内容移动到游戏状态中进行判断，结束状态为真时留空，以待后续添加，为假时绘制其余画布。</p>
+                <h2 id="reStart">重新开始</h2>
+                <p>到现在我们已经完成了基本的信息交互，但我们生命耗尽时，程序既不会结束也没有其他精灵，此时需要我们对整个游戏状态进行重置，回到启动时的状态，下面我们来继续快码加编。</p>
+                <p>编辑<code class="file">main.py</code>：</p>
+                <pre><code class="main-11"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <div class="imglist">
+                    <img src="../img/planeWars/restart.png" alt="restart">
+                    <img src="../img/planeWars/restart.png" alt="restart">
+                    <img src="../img/planeWars/restart.png" alt="restart">
+                </div>
+                <p>在 init_sprite() 处初始化重置按钮图片和其矩形并加入到 ui 字典，通过计算得到窗口中心点设置为重置按钮位置。</p>
+                <p>event_check() 新增获取鼠标按下状态和坐标信息，判断鼠标左键是否按下且鼠标位置处于重置按钮内，为真时游戏结束设置为 False，重置飞船生命并调用其自身重置方法，记分设为零，重新记录得分，对所有敌人对象调用重置。</p>
+                <p>draw() 在游戏结束状态为真时绘制重新开始按钮。</p>
+                <h2 id="createEvent">创建事件</h2>
+                <p>到目前位置可以说整个程序都有了正常的反馈，但是其中还是有些小地方可能不太引人注意，从表面上看是能运行的，但实际上却是有着些隐患，这些隐患不易察觉，只有通过大量测试才能找到，就例如我方飞机与敌方碰撞时发生重置，但是由于敌方只重置与我方相撞的第一个对象，这就会导致我们重置时在还没有反映过来时，之前如有紧挨一起的飞机持续导致我方重置导致游戏迅速结束，显然这不是我们想看到的，所以接下来我们来解决这个问题。</p>
+                <h3 id="shipInvincible">飞船无敌帧</h3>
+                <p>为飞船添加无敌帧属性辅助我方实现在刚复活阶段可以转义到安全地带。</p>
+                <p>先编辑<code class="file">ship.py</code>：</p>
+                <pre><code class="ship-2"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <p>添加辅助 invincible 辅助变量实现无敌帧初始时设为 False，update() 处在重置之前加入判断，如果当前无敌帧状态为真时则，跳过重置，即不重置。这样做是因为接下会把飞船 state 状态设为 False 所以在更新数据时会调用重置，加入此条件就可以防止重置。再修改 draw()，为其添加无敌帧分支，在无敌帧启动时调用此块的绘制方法及，每 5 次调用绘制一次，实现闪烁效果，来体现无敌帧的启动。最后通过 reset() 重置时开启无敌帧。</p>
+                <p>编辑<code class="file">main.py</code>：</p>
+                <pre><code class="main-12"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <div class="imglist">
+                    <img src="../img/planeWars/invincible.png" alt="invincible">
+                    <img src="../img/planeWars/invincible.png" alt="invincible">
+                    <img src="../img/planeWars/invincible.png" alt="invincible">
+                </div>
+                <p>在 __init__() 处添加无敌帧事件。event_check() 检测事件中加入无敌帧事件分支，事件触发时修改飞船状态为 False、飞船无敌帧为假、关闭每秒调用无敌帧事件。update() 经过飞船自身的数据更新判断无敌帧是否启动且飞船状态是否重置，都为真着将飞船状态设为假，发送每秒定时无敌帧事件。</p>
+
+                <h2 id="allExample">完整示例</h2>
+                <p>下面提供全文所有完整代码以供参考：</p>
+                <p><code class="file">main.py</code></p>
+                <pre><code class="main-all"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <p><code class="file">config.py</code></p>
+                <pre><code class="config-all"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <p><code class="file">ship.py</code></p>
+                <pre><code class="ship-all"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <p><code class="file">bullet.py</code></p>
+                <pre><code class="bullet-all"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+                <p><code class="file">enemy.py</code></p>
+                <pre><code class="enemy-all"><button class="copy" onclick="copyText(this)">Copy</button></code></pre>
+
+                <p>结语：本文目前可以说是完结了，此游戏还有其他的拓展空间，例如加入补给事件，敌人血量和音效，通过记分提升难度，记录每次最高得分等等。还有其他玩法留待各位读者自行发挥想象进行创作，如有不足处还望理解，编者能力有限，对此方面也是一知半解，作次文章只为初学者提供个人学习过程的理解与运用，预祝各位都能在自己热爱的领域内发光发热。</p>
+            </div>
+        </div>
+    </div>
+    <script src="../js/planeWars.js"></script>
+</body>
+
+</html>

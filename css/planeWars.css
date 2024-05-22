@@ -1,0 +1,191 @@
+a {
+    color: #0099ff;
+}
+
+.center {
+    position: relative;
+    width: 95%;
+    margin: 10px auto;
+}  
+
+.float-box {
+    float: left;
+    width: 100%;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0px;
+}
+
+.menu {
+    position: fixed;
+    top: 80px;
+    float: left;
+    width: 18% ;
+    padding: 8px 15px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 20px 2px #aaaaaa80;
+    background-color: #ffffff80;
+}  
+
+.menu dl dt a {
+    position: relative;
+    display: block;
+    margin: 5px;
+    line-height: 2em;
+    padding-left: 15px;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px #aaaaaa80;
+}
+
+.menu dl dt.arrow a::after {
+    position: absolute;
+    content: "▶";
+    right: 20px;
+    color: #0099ff;
+}
+
+.menu dl dt.arrow a:hover::after {
+    color: #ffb300;
+    content: "▼";   
+}
+
+.menu dl dt a:hover, .menu dl dd a:hover {
+    box-shadow: inset -2px -2px #25595480;
+}
+
+.menu dl dt a:hover, .menu dl dd a:hover {
+    color: #ffb300;
+}
+
+.menu dl dd a {
+    display: none;
+    line-height: 2em;
+    padding-left: 15px;
+    border-radius: 10px;
+    margin: 5px 5px 5px 40px;
+    box-shadow: inset 2px 2px #aaaaaa80;
+}
+
+.menu dl dt.collide.show ~ dd.collide a, .menu dl dt.info.show ~ dd.info a, .menu dl dt.event.show ~ dd.event a {
+    display: block;
+}
+
+.content {
+    position: relative;
+    float: right;
+    width: 80%;
+    top: 70px;
+    font-size: 18px;
+    padding: 5px 25px;
+    border-radius: 15px;
+    box-shadow: 0px 2px 20px 2px #aaaaaa80;
+    background-color: #ffffff80;
+
+}
+
+.content h1 {
+    padding-bottom: 10px;
+    border-bottom: solid 6px #444;
+}
+
+.content h2 {
+    display: inline-block;
+    margin: 8px 0px;
+    padding-bottom: 5px;
+    border-bottom: solid 4px #00000080;
+}
+
+.content p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    clear: left;
+}
+
+.content ul {
+    line-height: 1.5em;
+}
+
+.content ul li {
+    color: #0093a6;
+}
+
+.content ul.filelist {
+    width: 280px;
+}
+
+.content ul li span {
+    float: right;
+}
+
+.content code.file {
+    border-radius: 3px;
+    padding: 2px 5px;
+    margin: 0px 5px;
+    background-color: #ecececdd;
+}
+
+pre code {
+    display: block;
+    position: relative;
+    counter-reset: row-n;
+    font-size: 18px;
+    word-spacing: 5px;
+    color: #222;
+    background-color: #eeeeeeaa;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+pre code span.num {
+    float: left;
+    width: 50px;
+    position: relative;
+    top: 10px;
+    clear: left;
+    text-align: right;
+    line-height: 1.5em;
+}
+
+pre code span.code {
+    float: left;
+    position: relative;
+    top: 10px;
+    left: 12px;
+    line-height: 1.5em;
+}
+
+pre code .copy {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #4c4c4c;
+    font-size: 15px;
+    padding: 2px 5px;
+    border-radius: 8px;
+    border: solid 3px #c4c4c4;
+    opacity: 0.2;
+}
+
+pre code .copy:hover {
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.content .imglist {
+    display: flex;
+    width: 100%;
+    margin: 10px auto;
+    text-align: center;
+    align-items:stretch;
+}
+
+.content .imglist img {
+    width: 30%;
+    min-height: 200px;
+    margin: 15px 10px;
+    border-radius: 5px;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zctor Blog</title>
+    <link rel="stylesheet" href="../css/FontAwesome/css/all.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/lock.css">
+</head>
+
+<body>
+    <div class="header">
+        <a href="../index.html">
+            <h1>Zctor Blog</h1>
+            <span><i class="fa-solid fa-house"></i>&nbsp;首页</span>
+        </a>
+    </div>
+
+    <div class="center inlock">
+        <textarea id="no-lock" rows="10" placeholder="待加密文本"></textarea>
+    </div>
+
+    <div class="buttons center">
+        <button id="in">加密</button>
+        <button id="un">解密</button>
+
+        <button class="clear-info" id="clear-info">清理</button>
+    </div>
+
+    <div class="center unlock">
+        <textarea id="lock" rows="10" placeholder="待解密文本"></textarea>
+    </div>
+
+    <script src="../js/lock.js"></script>
+
+</body>
+
+</html>

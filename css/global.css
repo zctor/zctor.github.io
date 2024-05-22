@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 1200px;
+    background: linear-gradient(90deg, rgba(171, 245, 255, 0.419), rgba(174, 255, 200, 0.278));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+ul {
+    list-style: none;
+}
+
+/* 头部· */
+.header {
+    position: sticky;
+    top: 0px;
+    z-index: 99;
+    height: 60px;
+    margin-bottom: 20px;
+    background-color: #000;
+    color: #fff;
+    line-height: 55px;
+    opacity: 0.8;
+}
+
+.header h1 {
+    float: left;
+    color: #fff;
+    margin-left: 5%;
+}
+
+.header span {
+    color: #fff;
+    float: right;
+    margin-right: 5%;
+}
+
+img {
+    display: inline-block;
+    transform: scale(1);
+}
+
+img::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    background-image: url(../img/error.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50% 50%;
+}
+
+img::after {
+    content: attr(alt);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    font-size: 18px;
+    line-height: 3em;
+    color: #ffffff;
+    text-align: center;
+    background-color: #00000080;
+}
