@@ -99,6 +99,18 @@
     background-color: #ffffffdd;
 }
 
+.notice-pos .notice ul {
+    margin-top: 8px;
+    padding: 0px 5px;
+}
+
+.notice-pos .notice ul li {
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    background-color: #00000010;
+}
+
 .notice-pos .notice h2 {
     padding-left: 5px;
     padding-bottom: 8px;
