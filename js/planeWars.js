@@ -30,7 +30,8 @@ class ShipWars:
         for i in range(len(self.bg_pos)):
             self.bg_pos[i] += bg_speed
             if self.bg_pos[i] > config.SCREEN_SIZE[1]:
-                self.bg_pos[i] = min(self.bg_pos)-config.SCREEN_SIZE[1] + (bg_speed if not i else 0)
+                self.bg_pos[i] = min(self.bg_pos)-config.SCREEN_SIZE[1] + 
+                                        (bg_speed if not i else 0)
 
     def draw(self):
         self.screen.fill(config.WHITE)

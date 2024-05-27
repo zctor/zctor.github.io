@@ -20,10 +20,15 @@ a {
 }
 
 .menu {
-    position: fixed;
-    top: 80px;
     float: left;
-    width: 18% ;
+    width: 20%;
+}
+
+.menu dl {
+    position: relative;
+    top: 70px;
+    right: 20px;
+    width: 100% ;
     padding: 8px 15px;
     border-radius: 15px;
     box-shadow: 0px 2px 20px 2px #aaaaaa80;
@@ -137,7 +142,8 @@ pre code {
     background-color: #eeeeeeaa;
     border-radius: 10px;
     font-family: Arial, Helvetica, sans-serif;
-    overflow: hidden;
+    /* overflow: hidden; */
+    overflow: auto;
 }
 
 pre code span.num {
@@ -179,8 +185,8 @@ pre code .copy:hover {
     display: flex;
     width: 100%;
     margin: 10px auto;
-    text-align: center;
     align-items:stretch;
+    justify-content: center;
 }
 
 .content .imglist img {
