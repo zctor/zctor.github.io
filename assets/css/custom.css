@@ -1,0 +1,9 @@
+/* 只强制最小尺寸，不影响主题原有滚动条风格 */
+::-webkit-scrollbar {
+  min-width: 8px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  min-height: 60px !important;
+  border-radius: 10px !important;
+}
